@@ -33,7 +33,7 @@ reg wren_n_delay3;
 
 reg ddr_dqs_w;
 
-`include "D:\DDR_parameters.v"
+`include "DDR_parameters.v"
 
 
 
