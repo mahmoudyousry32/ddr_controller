@@ -35,7 +35,7 @@ reg	dout_ready_1;
 reg	dout_ready_2;
 reg	dout_ready_3;
 
-`include "D:\DDR_parameters.v"
+`include "DDR_parameters.v"
 
 always@(posedge clk_2x,negedge rst)begin
 if(!rst) ddr_din_clk_2x <= 0;
