@@ -24,7 +24,7 @@ reg dqs_io_en;
 
 
 
-`include "D:\DDR_parameters.v"
+`include "DDR_parameters.v"
 
 always@(posedge clk ,negedge rst)begin
 if(!rst) begin
