@@ -76,7 +76,7 @@ wire sys_dataio_en;
 
 
 
-`include "D:\DDR_parameters.v"
+`include "DDR_parameters.v"
 
 DDR_ctrl CTRL(
 /*INPUTS*/		.clk(clk),
