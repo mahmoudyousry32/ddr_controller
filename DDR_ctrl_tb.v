@@ -55,7 +55,7 @@ assign ddr_dq = ddr_dq_drive;
 assign ddr_dq_recived = ddr_dq;
 assign ddr_dqs = ddr_dqs_drive;
 assign ddr_dqs_recived = ddr_dqs;
-`include "D:\DDR_parameters.v"
+`include "DDR_parameters.v"
 
 /*
 inout  [15:0] sys_data;
