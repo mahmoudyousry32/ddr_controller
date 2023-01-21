@@ -59,7 +59,7 @@ assign	ctrl_ba			=	ctrl_addr[24:23];
 assign	ctrl_addr_row	=	ctrl_addr[22:10];
 assign	ctrl_addr_col	=	ctrl_addr[9:0]	;
 
-`include "D:\DDR_parameters.v"
+`include "DDR_parameters.v"
 
 
 
