@@ -82,62 +82,9 @@ reg 	[1:0] 		MR_flag;
 reg 	[3:0] 		cmd_state;
 reg		[24:0]		 addr_to_dp;
 
-`include "D:\DDR_parameters.v"
-
-/*
-parameter CAS_LATENCY	=	2;
-parameter BURST_LENGTH	=	4;
-parameter BURST_TYPE	=	0;
-parameter SYS_CLK = 7.5;
-
-parameter i_WAIT_200US	=	4'b0001;
-parameter i_NOP			=	4'b0010;
-parameter i_PRECHARGE	=	4'b0011;
-parameter i_WAIT_tRP	=	4'b0100;
-parameter i_EMR_SET		=	4'b0101;
-parameter i_WAIT_tMRD	=	4'b0110;
-parameter i_MR_SET		=	4'b0111;
-parameter i_AUTOREFRESH	=	4'b1000;
-parameter i_WAIT_tRFC	=	4'b1001;
-parameter i_MR_SET_2	= 	4'b1010;
-parameter i_READY		=	4'b1011;
-
-parameter c_IDLE					=	4'b0001;
-parameter c_REFRESH_DONE			=	4'b0010;
-parameter c_ACTIVE					=	4'b0011;
-parameter c_WAIT_tRCD				=	4'b0100;
-parameter c_READ					=	4'b0101;
-parameter c_WRITE					=	4'b0110;
-parameter c_WAIT_CAS_LATENCY		=	4'b0111;
-parameter c_WAIT_END_OF_R_BURST		=	4'b1000;
-parameter c_WAIT_END_OF_W_BURST		=	4'b1001;
-parameter c_AUTOREFRESH				=	4'b1010;
-parameter c_NOP						=	4'b1011;
-parameter c_DONE					=	4'b1100;
-parameter c_WAIT_tRFC				=	4'b1101;
-parameter c_WAIT_WRITE_RECOVERY		=	4'b1110;
+`include "DDR_parameters.v"
 
 
-/*
-***********DONT FORGET TO UNCOMMENT THIS*********************
-parameter tRP 			= 	20/SYS_CLK 	;
-parameter tMRD 			= 	15/SYS_CLK - 1	;
-parameter tRFC			= 	75/SYS_CLK - 1	;
-parameter tRCD			=	20/SYS_CLK	;
-parameter tWR			=	30/SYS_CLK - 1;
-parameter init_200uS 	=	200000/SYS_CLK	;
-
-parameter RERESH_INTERVAL	=	7850/SYS_CLK - 50;
-
-parameter tRP 			= 	200/SYS_CLK 	;
-parameter tMRD 			= 	150/SYS_CLK - 1	;
-parameter tRFC			= 	750/SYS_CLK - 1	;
-parameter tRCD			=	200/SYS_CLK	;
-parameter tWR			=	300/SYS_CLK - 1;
-parameter init_200uS 	=	200000/SYS_CLK	+ 1;
-
-parameter RERESH_INTERVAL	=	7800/SYS_CLK - 1;
-*/
 //------------------INITILIZATION STATE MACHINE---------------------------------------------------------------------------------------------
 always@(posedge clk,negedge rst)
 begin
