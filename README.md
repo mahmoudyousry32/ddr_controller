@@ -15,7 +15,8 @@ for more info on micron's SDRAM you can check out the datasheet over here
 
 https://media-www.micron.com/-/media/client/global/documents/products/data-sheet/dram/ddr1/256mb_ddr.pdf?rev=7d969af24d6d4b74a34e427f350b1c77
 
-the clk_nx , clk_2x are to be connected later on to a PLL but for the mean time for simulation purposes i just generate the clk_nx and clk_2x in the testbench file
+This is a full block diagram of the system 
+![DDR_CONTROLLER_TOP](https://user-images.githubusercontent.com/123260720/214126050-9e1c775e-7a10-48d1-822a-012cb23a1fec.jpg)
 
 the module is used to interface to a system with a 25 bit address bus [13 bit for the row to be accessed, 10 bits for the column and 2 bits for the bank] and a 16 bit data bus 
 the way the system interfaces with the controller is that when the system wants to read or write some data it first needs pull the address_strobe signal low for 1 clock cycle 
