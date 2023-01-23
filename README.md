@@ -1,6 +1,7 @@
 # ddr_controller
-the DDR controller module is made to interface with micron's DDR SDRAM MT46V32M8 – 8 Meg x 8 x 4 banks which is 256Mbit SDRAM @ 133MHz ,-75Z speed grading 
-operating mode  
+the DDR controller module is made to interface with micron's DDR SDRAM MT46V32M8 – 8 Meg x 8 x 4 banks which is 256Mbit SDRAM @ 133MHz ,-75Z speed grading
+
+operating mode is set to
 CAS LATENCY = 2
 
 BURST LENGTH = 8 (64 bits per burst)
