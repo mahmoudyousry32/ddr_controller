@@ -59,6 +59,11 @@ As with standard SDR SDRAMs, the pipelined, multibank architecture of DDR SDRAMs
 allows for concurrent operation, thereby providing high effective bandwidth by hiding 
 row precharge and activation time.
 
+commands are sent using the CSE,RASN,CASN,WEN pins, a full list of commands are provided in the next figure
+![image](https://user-images.githubusercontent.com/123260720/214142485-51f03e56-0cd9-4260-860c-74b17a21843c.png) 
+
+for more info on Micron's DDR SDRAM check out the datasheet [here](https://media-www.micron.com/-/media/client/global/documents/products/data-sheet/dram/ddr1/256mb_ddr.pdf?rev=7d969af24d6d4b74a34e427f350b1c77).
+
 ## DDR SDRAM Operation and initilization sequence 
 Reading  and  writing  to  and  from  the  RAM  module  is  burst  oriented.  A 
 location for reading or writing is selected via commands sent to the DDR RAM 
@@ -69,6 +74,47 @@ be met:
 * VDD and VDDQ are driven by a single output at 2.5V ± .2 V 
 * VTT is limited to 1.35 V 
 * VREF tracks VDDQ/2
+### Initialization
+Prior to normal operation, DDR SDRAMs must be powered up and initialized in a 
+predefined manner. Operational procedures, other than those specified, may result in 
+undefined operation.
+To ensure device operation, the DRAM must be initialized as described in the following 
+steps:
+1.  Simultaneously apply power to VDD and VDDQ.
+2. Apply VREF and then VTT power. VTT must be applied after VDDQ to avoid device latch- 
+up, which may cause permanent damage to the device. Except for CKE, inputs are not 
+recognized as valid until after VREF is applied.
+3.  Assert and hold CKE at a LVCMOS logic LOW. Maintaining an LVCMOS LOW level on 
+CKE during power-up is required to ensure that the DQ and DQS outputs will be in 
+the High-Z state, where they will remain until driven in normal operation (by a read 
+access).
+4.  Provide stable clock signals.
+5.  Wait at least 200μs.
+6.  Bring CKE HIGH, and provide at least one NOP or DESELECT command. At this 
+point, the CKE input changes from a LVCMOS input to a SSTL_2 input only and will 
+remain a SSTL_2 input unless a power cycle occurs.
+7.  Perform a PRECHARGE ALL command.
+8.  Wait at least tRP time; during this time NOPs or DESELECT commands must be given.
+9. Using the LMR command, program the extended mode register (E0 = 0 to enable the 
+DLL and E1 = 0 for normal drive; or E1 = 1 for reduced drive and E2–En must be set to 
+0 [where n = most significant bit]).
+10.  Wait at least tMRD time; only NOPs or DESELECT commands are allowed.
+11.  Using the LMR command, program the mode register to set operating parameters 
+and to reset the DLL. At least 200 clock cycles are required between a DLL reset and 
+any READ command.
+12.  Wait at least tMRD time; only NOPs or DESELECT commands are allowed.
+13.  Issue a PRECHARGE ALL command.
+14.  Wait at least tRP time; only NOPs or DESELECT commands are allowed.
+15.  Issue an AUTO REFRESH command. This may be moved prior to step 13.
+16.  Wait at least tRFC time; only NOPs or DESELECT commands are allowed.
+17.  Issue an AUTO REFRESH command. This may be moved prior to step 13.
+18.  Wait at least tRFC time; only NOPs or DESELECT commands are allowed.
+19.  Although not required by the Micron device, JEDEC requires an LMR command to 
+clear the DLL bit (set M8 = 0). If an LMR command is issued, the same operating 
+parameters should be utilized as in step 11.
+20.  Wait at least tMRD time; only NOPs or DESELECT commands are supported.
+21.  At this point the DRAM is ready for any valid command. At least 200 clock cycles with 
+CKE HIGH are required between step 11 (DLL RESET ) and any READ command.
 
 # The DDR Controller
 the DDR controller module is made to interface with micron's DDR SDRAM MT46V32M8 – 8 Meg x 8 x 4 banks which is 256Mbit SDRAM @ 133MHz ,-75Z speed grading
