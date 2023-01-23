@@ -22,12 +22,6 @@ the address should remain on the bus for 1 clock cycle after the address_strobe 
 so essentially a read or a write request should look like something as follows
 ![image](https://user-images.githubusercontent.com/123260720/214121023-50b3ec9a-e7ae-4faa-a957-ef8abf931558.png)
 
-here a write request is sent to the controller to the address 10f0f83 in hex
-
-the system should then wait for the wren signal to be asserted by the controller indicating that the system should put the data on the sys_data bus in the next clock cycle
-each 16 bits of data should be kept for one clock cycle
-so the sys_data bus should look like the following pic
-![image](https://user-images.githubusercontent.com/123260720/214122979-a7204c63-7523-4153-b3b7-9c62bcb10f00.png)
-
+here a write request is sent to the controller to the address 10f0f83h
 
 
