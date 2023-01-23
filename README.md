@@ -18,6 +18,7 @@ https://media-www.micron.com/-/media/client/global/documents/products/data-sheet
 This is a full block diagram of the system 
 ![DDR_CONTROLLER_TOP](https://user-images.githubusercontent.com/123260720/214126050-9e1c775e-7a10-48d1-822a-012cb23a1fec.jpg)
 
+in the files provided the clk_nx and the clk_x and the clk_2x signals are all generated from the testbench for simulation purposes the PLL is only added later when the design is synthesized 
 
 the module is used to interface to a system with a 25 bit address bus [13 bit for the row to be accessed, 10 bits for the column and 2 bits for the bank] and a 16 bit data bus 
 the way the system interfaces with the controller is that when the system wants to read or write some data it first needs pull the address_strobe signal low for 1 clock cycle 
