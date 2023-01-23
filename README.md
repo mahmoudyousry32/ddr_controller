@@ -12,6 +12,7 @@ BURST TYPE = sequential
 the module is not yet fully parameterized although it has seperate parameters file changing the parameters would cause it not to work so its made specifically to
 work at 133 MHz and for the MT46V32M8 SDRAM module 
 for more info on micron's SDRAM you can check out the datasheet over here
+
 https://media-www.micron.com/-/media/client/global/documents/products/data-sheet/dram/ddr1/256mb_ddr.pdf?rev=7d969af24d6d4b74a34e427f350b1c77
 
 the clk_nx , clk_2x are to be connected later on to a PLL but for the mean time for simulation purposes i just generate the clk_nx and clk_2x in the testbench file
