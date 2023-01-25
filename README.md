@@ -157,6 +157,23 @@ so essentially a read or a write request should look like something as follows
 here a write request is sent to the controller to the address 0x10f0f83
 
 ## DDR_ctrl module
+The DDR_ctrl module consists of 2 FSMs 
+1. the initilization state machine which is responsible for initializing the DDR SDRAM module in a predefined sequence , the state machine generates the necessary commands for initilization and going through the predefined initilization sequence mentioned before
+2. The command state machine which is responsible for issuing read/write commands based on the system request and its also responsible for automatically refreshing the DDR SDRAM module by issuing an AUTOREFRESH command every 996 clock cycles as The 256Mb DDR SDRAM requires Auto Refresh cycles at an average periodic interval of 7.8us , 996 clock cycles at 133MHz equals 7.47 us
+
+![DDR_STATE_MACHINE_init_state](https://user-images.githubusercontent.com/123260720/214649980-a8e7c1c5-c8c3-4f6c-a66c-8cd2b49b01ac.jpg)
+<p align="center"> <sub>Initilization state machine</sub>
+</p>
+
+![DDR_STATE_MACHINE_cmd_state](https://user-images.githubusercontent.com/123260720/214651678-77529d40-6136-4967-add7-49120e8e6ee2.jpg)
+<p align="center"> <sub>commands state machine</sub>
+</p>
+
+the DDR_ctrl module contains also an automatic refresh counter that issues a refresh request to the command state machine every 996 clock cycles
+the cmd state machine prioritizes the refresh request over a read/write request meaning that if a read or write request is issued by the system and a refresh request is issued at the same clock cycle the cmd state machine will issue the refresh command first and then it will service the read/write request 
+which is stored to be serviced later after the refresh 
+
+
 
 
 
