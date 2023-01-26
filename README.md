@@ -198,7 +198,24 @@ the dout_rdy reg creates an enable signal to indicate to the system that data is
 
 ## DDR_write_datapath module
 
-This module is responsible for sampling the data to be written to the DDR module from the sys_data bus and sending this data to the DDR SDRAM module on both edges of the clock
+This module is responsible for sampling the data to be written to the DDR module from the sys_data bus and sending this data to the DDR SDRAM module on both edges of the clock , this module operates at twice the clock rate so that it can send data at both edges of the clock 
+
+![image](https://user-images.githubusercontent.com/123260720/214937711-217de1de-cc03-4c50-b7ec-78b918d5b1c4.png)
+
+
+the wren signal is generated from the DDR_ctrl module its used to indicate to the system that it should start sending the data to be written on the next positive edge of the clock 
+and its also used by the write module along with the cmd_state to indicate when to start sampling the data from the sys_data bus 
+the data sampled from the sys_data bus are put into a 3 stage shift register which shifts the lower or higher 8 bits from the sys_data bus depending on the high_low_byte reg which tells the shift register whether to shift higher 8 bits or the lower 8 bits if the high_low_byte reg has 1 it means shift the lower 8 bits and if it has 0 it means shift the higher 8 bits 
+
+the shift register is also used as to center align the sampled 8 bits with both edges of the dqs signal
+
+the wren signal is used to generated the dqs signal where the wren signal is delayed until the WRITE command is sampled by the DDR SDRAM module 
+after the command is sampled then on the next negative edge of the 2x clock the wren_delay_3 is asserted which is used by ddr_dqs_w reg 
+
+![image](https://user-images.githubusercontent.com/123260720/214940432-14ca5d5a-1a74-442e-b39b-1a9ea919b171.png)
+
+
+
 
 
 
