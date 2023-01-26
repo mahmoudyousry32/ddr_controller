@@ -181,7 +181,27 @@ This module is responsbile for generating the command signals [CSN,RASN,CASN,WEN
 
 This module is responsible for latching data from the DDR SDRAM module when a read command is issued , it basically samples the data received at the dq data bus and then it concatenates every 2 bytes of data then sends them to the sys_data bus to be received by the system at the positive edge of the clock
 
+![image](https://user-images.githubusercontent.com/123260720/214927046-26afb8bf-eb0b-4660-908c-11064bfe8dac.png) 
+
+
+
+
+this module samples data from the dq bus at twice the clock rate so it can sample the data on the dq bus at both edges of the clock so it samples at 266 MHz
+the ddr_din_clk_2x reg samples at twice the clock rate , the ddr_din_posedge reg samples the data from the ddr_din_clk_2x at the positive edge of the 133MHz clock it basically stores the higher 8 bits of the 16 bit word that is to be sent to the system , the ddr_din_negedge reg samples at the negative edge of the clock it samples the lower 8 bits of the 16 bit word , the ddr_din_h and the ddr_din_low then take the data stored in both the ddr_din_negedge reg and ddr_din_posedge reg to synchronize them at the posedge of the clock so that the system can sample them
+
+the dout_rdy reg creates an enable signal to indicate to the system that data is ready to be sampled from the sys_data bus
+
+![image](https://user-images.githubusercontent.com/123260720/214930922-47f4d6a4-b66c-4bcb-9617-463da3595af4.png)
+<p align="center"> Waveform from the DDR_read_datapath module 
+</p>
+
+
 ## DDR_write_datapath module
+
+This module is responsible for sampling the data to be written to the DDR module from the sys_data bus and sending this data to the DDR SDRAM module on both edges of the clock
+
+
+
 
 
 
