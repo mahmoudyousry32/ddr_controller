@@ -173,6 +173,18 @@ the DDR_ctrl module contains also an automatic refresh counter that issues a ref
 the cmd state machine prioritizes the refresh request over a read/write request meaning that if a read or write request is issued by the system and a refresh request is issued at the same clock cycle the cmd state machine will issue the refresh command first and then it will service the read/write request 
 which is stored to be serviced later after the refresh 
 
+## DDR_command_gen module
+
+This module is responsbile for generating the command signals [CSN,RASN,CASN,WEN] and address signals for the DDR SDRAM module depending on the current state of the init_state and cmd_state in the DDR_ctrl module
+
+## DDR_read_datapath module
+
+This module is responsible for latching data from the DDR SDRAM module when a read command is issued , it basically samples the data received at the dq data bus and then it concatenates every 2 bytes of data then sends them to the sys_data bus to be received by the system at the positive edge of the clock
+
+## DDR_write_datapath module
+
+
+
 
 
 
